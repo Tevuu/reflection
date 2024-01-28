@@ -18,12 +18,17 @@ export const Home = ({ open }) => {
         "zxckvnds ivnweoixc nvroiknx oisdknroik wn ikxzcnnvnnnnnnnnnenronniknn ndfsikv nfvnnnnnnnnnnr e gkjfdsng xcvbsdf nvkosidafnsdfoisdnfoisdfnosd aosdifnzxnvcdsogfinwergoisdkjgdsf mcxv ",
     },
   ]);
+
+  function changeResult(data) {
+    setResult([...data]);
+  }
+
   return (
     <>
       <div className="flex w-full h-screen">
         <div className="flex flex-col items-center w-full justify-between overflow-auto">
           <div className="flex w-[90%] flex-col justify-center items-center mt-20 gap-4">
-            <Search />
+            <Search changeResult={changeResult} />
             <div className="flex flex-row gap-4 text-sm lg:text-base">
               <div className="opacity-30">
                 {result.length > 0
@@ -33,7 +38,8 @@ export const Home = ({ open }) => {
               <div className="opacity-30">{result.length > 0 ? `|` : ""}</div>
               <div
                 className="opacity-30 hover:opacity-75 duration-300"
-                onClick={() => open()}>
+                onClick={() => open()}
+              >
                 Подозрительный контент
               </div>
             </div>
@@ -43,10 +49,10 @@ export const Home = ({ open }) => {
                 result.map((item) => {
                   return (
                     <Card
-                      key={item.id}
+                      key={item.id ?? item.cacheId + new Date().valueOf()}
                       title={item.title}
                       link={item.link}
-                      description={item.description}
+                      description={item.description ?? item.snippet}
                     />
                   );
                 })
@@ -71,13 +77,15 @@ export const Home = ({ open }) => {
               <a
                 href="https://github.com/infeibal"
                 className="hover:text-white duration-500 "
-                target="_blank">
+                target="_blank"
+              >
                 Fedorov A.S
               </a>
               <a
                 href="https://github.com/Tevuu"
                 className="hover:text-white duration-500"
-                target="_blank">
+                target="_blank"
+              >
                 Smirnov V.A
               </a>
             </div>
