@@ -14,8 +14,8 @@ export const Home = ({ open }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  function changeTotalResultsCount(response) {
-    setTotalResultsCount(+response.queries.request[0].totalResults);
+  async function changeTotalResultsCount(response) {
+    await setTotalResultsCount(+response.queries.request[0].totalResults);
   }
 
   return (
@@ -37,7 +37,8 @@ export const Home = ({ open }) => {
               <div className="opacity-30">{result.length > 0 ? `|` : ""}</div>
               <div
                 className="opacity-30 hover:opacity-75 duration-300"
-                onClick={() => open()}>
+                onClick={() => open()}
+              >
                 Подозрительный контент
               </div>
             </div>
@@ -63,26 +64,10 @@ export const Home = ({ open }) => {
               )}
             </div>
             <div className="flex w-1/2 items-center justify-center gap-2">
-              <PageNavButton
-                number={1}
-                currentpage={currentPage}
-                setCurrentPage={setCurrentPage}
-              />
-              <PageNavButton
-                number={2}
-                currentpage={currentPage}
-                setCurrentPage={setCurrentPage}
-              />
-              <PageNavButton
-                number={3}
-                currentpage={currentPage}
-                setCurrentPage={setCurrentPage}
-              />
-              <PageNavButton
-                number={4}
-                currentpage={currentPage}
-                setCurrentPage={setCurrentPage}
-              />
+              <PageNavButton number={1} currentpage={currentPage} />
+              <PageNavButton number={2} currentpage={currentPage} />
+              <PageNavButton number={3} currentpage={currentPage} />
+              <PageNavButton number={4} currentpage={currentPage} />
             </div>
           </div>
 
@@ -101,13 +86,15 @@ export const Home = ({ open }) => {
               <a
                 href="https://github.com/infeibal"
                 className="hover:text-white duration-500 "
-                target="_blank">
+                target="_blank"
+              >
                 Fedorov A.S
               </a>
               <a
                 href="https://github.com/Tevuu"
                 className="hover:text-white duration-500"
-                target="_blank">
+                target="_blank"
+              >
                 Smirnov V.A
               </a>
             </div>
