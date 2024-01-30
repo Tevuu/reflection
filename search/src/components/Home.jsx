@@ -1,6 +1,7 @@
 import { Card } from "./Card";
 import { useState } from "react";
 import { Search } from "./Search";
+import { PageNavButton } from "./UI/PageNavButton";
 
 export const Home = ({ open }) => {
   const [result, setResult] = useState([]);
@@ -11,7 +12,9 @@ export const Home = ({ open }) => {
     setResult([...data]);
   }
 
-  function changeTotalResultsCout(response) {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  function changeTotalResultsCount(response) {
     setTotalResultsCount(+response.queries.request[0].totalResults);
   }
 
@@ -22,7 +25,7 @@ export const Home = ({ open }) => {
           <div className="flex w-[90%] flex-col justify-center items-center mt-20 gap-4">
             <Search
               changeResult={changeResult}
-              changeTotalResultsCount={changeTotalResultsCout}
+              changeTotalResultsCount={changeTotalResultsCount}
               resultsCountOfCurrentPage={result.length}
             />
             <div className="flex flex-row gap-4 text-sm lg:text-base">
@@ -34,8 +37,7 @@ export const Home = ({ open }) => {
               <div className="opacity-30">{result.length > 0 ? `|` : ""}</div>
               <div
                 className="opacity-30 hover:opacity-75 duration-300"
-                onClick={() => open()}
-              >
+                onClick={() => open()}>
                 Подозрительный контент
               </div>
             </div>
@@ -60,6 +62,28 @@ export const Home = ({ open }) => {
                 <div></div>
               )}
             </div>
+            <div className="flex w-1/2 items-center justify-center gap-2">
+              <PageNavButton
+                number={1}
+                currentpage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+              <PageNavButton
+                number={2}
+                currentpage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+              <PageNavButton
+                number={3}
+                currentpage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+              <PageNavButton
+                number={4}
+                currentpage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+            </div>
           </div>
 
           <div className="bg-black/80 w-full text-cyan-50 flex items-center justify-center flex-col py-2 mt-20 relative">
@@ -77,15 +101,13 @@ export const Home = ({ open }) => {
               <a
                 href="https://github.com/infeibal"
                 className="hover:text-white duration-500 "
-                target="_blank"
-              >
+                target="_blank">
                 Fedorov A.S
               </a>
               <a
                 href="https://github.com/Tevuu"
                 className="hover:text-white duration-500"
-                target="_blank"
-              >
+                target="_blank">
                 Smirnov V.A
               </a>
             </div>

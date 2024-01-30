@@ -25,7 +25,7 @@ export const Card = ({ title, link, description }) => {
       </div>
       <div className="font-bold text-lg">{title}</div>
       <a
-        className="opacity-50 underline font-light"
+        className="line-clamp-1 opacity-50 underline font-light "
         href={link}
         target="_blank">
         {link}
