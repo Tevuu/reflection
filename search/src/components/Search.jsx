@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-export const Search = ({ changeResult }) => {
+export const Search = ({
+  changeResult,
+  changeTotalResultsCount,
+  resultsCountOfCurrentPage,
+}) => {
   const [request, setRequest] = useState("");
 
   function onEnter(event) {
@@ -9,7 +13,10 @@ export const Search = ({ changeResult }) => {
         `https://www.googleapis.com/customsearch/v1?key=AIzaSyAAZYagQFtBXunP1hjuJmS27qJTw6IQoCQ&cx=64e9a8ec65b6b4aaa&q=${request}`
       )
         .then((response) => response.json())
-        .then((response) => changeResult(response.items));
+        .then((response) => {
+          changeResult(response.items);
+          changeTotalResultsCount(response);
+        });
     }
   }
 

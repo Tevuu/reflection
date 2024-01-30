@@ -1,26 +1,18 @@
 import { Card } from "./Card";
 import { useState } from "react";
-import { Search } from "./Serach";
+import { Search } from "./Search";
 
 export const Home = ({ open }) => {
-  const [result, setResult] = useState([
-    {
-      id: 1,
-      title: "test",
-      link: "https://ok.ru/fdsf",
-      description: "test",
-    },
-    {
-      id: 2,
-      title: "test",
-      link: "https://vk.com/fdsf",
-      description:
-        "zxckvnds ivnweoixc nvroiknx oisdknroik wn ikxzcnnvnnnnnnnnnenronniknn ndfsikv nfvnnnnnnnnnnr e gkjfdsng xcvbsdf nvkosidafnsdfoisdnfoisdfnosd aosdifnzxnvcdsogfinwergoisdkjgdsf mcxv ",
-    },
-  ]);
+  const [result, setResult] = useState([]);
+
+  const [totalResultsCount, setTotalResultsCount] = useState(0);
 
   function changeResult(data) {
     setResult([...data]);
+  }
+
+  function changeTotalResultsCout(response) {
+    setTotalResultsCount(+response.queries.request[0].totalResults);
   }
 
   return (
@@ -28,11 +20,15 @@ export const Home = ({ open }) => {
       <div className="flex w-full h-screen">
         <div className="flex flex-col items-center w-full justify-between overflow-auto">
           <div className="flex w-[90%] flex-col justify-center items-center mt-20 gap-4">
-            <Search changeResult={changeResult} />
+            <Search
+              changeResult={changeResult}
+              changeTotalResultsCount={changeTotalResultsCout}
+              resultsCountOfCurrentPage={result.length}
+            />
             <div className="flex flex-row gap-4 text-sm lg:text-base">
               <div className="opacity-30">
                 {result.length > 0
-                  ? `Найдено Результатов: ${result.length}`
+                  ? `Найдено Результатов: ${totalResultsCount}`
                   : ""}
               </div>
               <div className="opacity-30">{result.length > 0 ? `|` : ""}</div>
@@ -49,7 +45,11 @@ export const Home = ({ open }) => {
                 result.map((item) => {
                   return (
                     <Card
-                      key={item.id ?? item.cacheId + new Date().valueOf()}
+                      key={
+                        item.id ?? item.cacheId
+                          ? item.cacheId + new Date().valueOf()
+                          : Math.random() + new Date().valueOf()
+                      }
                       title={item.title}
                       link={item.link}
                       description={item.description ?? item.snippet}
