@@ -3,19 +3,18 @@ import { useState } from "react";
 export const Search = ({
   changeResult,
   changeTotalResultsCount,
-  resultsCountOfCurrentPage,
+  getRequest,
 }) => {
   const [request, setRequest] = useState("");
 
-  function onEnter(event) {
+  async function onEnter(event) {
     if (event.key === "Enter" && request.length) {
-      fetch(
-        `https://www.googleapis.com/customsearch/v1?key=AIzaSyAAZYagQFtBXunP1hjuJmS27qJTw6IQoCQ&cx=64e9a8ec65b6b4aaa&q=${request}`
-      )
+      fetch(`${import.meta.env.VITE_GOOGLE_SEARCH_API_LINK}&q=${request}`)
         .then((response) => response.json())
         .then((response) => {
           changeResult(response.items);
           changeTotalResultsCount(response);
+          getRequest(request);
         });
     }
   }

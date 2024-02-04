@@ -5,14 +5,17 @@ import { PageNavButton } from "./UI/PageNavButton";
 
 export const Home = ({ open }) => {
   const [result, setResult] = useState([]);
-
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalResultsCount, setTotalResultsCount] = useState(0);
+  const [request, setRequest] = useState("");
 
   function changeResult(data) {
     setResult([...data]);
   }
 
-  const [currentPage, setCurrentPage] = useState(1);
+  function getRequest(data) {
+    setRequest(data);
+  }
 
   async function changeTotalResultsCount(response) {
     await setTotalResultsCount(+response.queries.request[0].totalResults);
@@ -24,9 +27,12 @@ export const Home = ({ open }) => {
         <div className="flex flex-col items-center w-full justify-between overflow-auto">
           <div className="flex w-[90%] flex-col justify-center items-center mt-20 gap-4">
             <Search
+              currentPage={currentPage}
               changeResult={changeResult}
               changeTotalResultsCount={changeTotalResultsCount}
               resultsCountOfCurrentPage={result.length}
+              result={result}
+              getRequest={getRequest}
             />
             <div className="flex flex-row gap-4 text-sm lg:text-base">
               <div className="opacity-30">
@@ -62,12 +68,19 @@ export const Home = ({ open }) => {
               ) : (
                 <div></div>
               )}
-            </div>
-            <div className="flex w-1/2 items-center justify-center gap-2">
-              <PageNavButton number={1} currentpage={currentPage} />
-              <PageNavButton number={2} currentpage={currentPage} />
-              <PageNavButton number={3} currentpage={currentPage} />
-              <PageNavButton number={4} currentpage={currentPage} />
+              {result.length > 0 ? (
+                <div className="flex w-1/2 items-center justify-center gap-2">
+                  <PageNavButton
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    request={request}
+                    result={result}
+                    changeResult={changeResult}
+                  />
+                </div>
+              ) : (
+                <div></div>
+              )}
             </div>
           </div>
 
