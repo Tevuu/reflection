@@ -34,15 +34,17 @@ export const Home = ({ open }) => {
               result={result}
               getRequest={getRequest}
             />
-            <div className="flex flex-row gap-4 text-sm lg:text-base">
+            <div className="flex flex-row gap-4 text-sm lg:text-base cursor-default">
               <div className="opacity-30">
                 {result.length > 0
                   ? `Найдено Результатов: ${totalResultsCount}`
                   : ""}
               </div>
-              <div className="opacity-30">{result.length > 0 ? `|` : ""}</div>
+              <div className="cursor-default opacity-30">
+                {result.length > 0 ? `|` : ""}
+              </div>
               <div
-                className="opacity-30 hover:opacity-75 duration-300"
+                className="opacity-30 hover:opacity-75 duration-300 cursor-pointer"
                 onClick={() => open()}
               >
                 Подозрительный контент

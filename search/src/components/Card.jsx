@@ -7,7 +7,8 @@ export const Card = ({ title, link, description }) => {
             src="https://cdn-icons-png.flaticon.com/512/10579/10579555.png"
             onClick={() => console.log("p")}
             title="Добавить в подозрительный контент"
-            className=" duration-300 cursor-pointer max-w-10 max-h-10 object-center opacity-0 group-hover:opacity-100"></img>
+            className=" duration-300 cursor-pointer max-w-10 max-h-10 object-center opacity-0 group-hover:opacity-100"
+          ></img>
         </div>
 
         <div className="absolute z-0">
@@ -27,7 +28,8 @@ export const Card = ({ title, link, description }) => {
       <a
         className="line-clamp-1 opacity-50 underline font-light "
         href={link}
-        target="_blank">
+        target="_blank"
+      >
         {link}
       </a>
       <div className="">{description}</div>
