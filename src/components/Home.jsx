@@ -27,8 +27,8 @@ export const Home = ({ open }) => {
       <div className="flex w-full h-screen">
         <div className="flex flex-col items-center w-full justify-between overflow-auto">
           <div className="flex w-[90%] flex-col justify-center items-center mt-20 gap-4">
-            <h1 className="text-6xl mb-6 font-extralight text-neutral-700 [text-shadow:_0_4px_0_rgb(0_0_0_/_40%)]">
-              О Т Р А Ж ЕƎ Н И E
+            <h1 className="text-6xl mb-6 font-extralight text-neutral-700 [text-shadow:_0_4px_0_rgb(0_0_0_/_20%)]">
+              О Т Р А Ж Е Н И E
             </h1>
 
             <Search
