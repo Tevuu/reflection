@@ -2,6 +2,7 @@
   "name": "search",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://tevuu.github.io/reflection",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,6 +11,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "autoprefixer": "^10.4.17",
     "dotenv": "^16.4.1",
     "jspdf": "^2.5.1",
@@ -29,6 +32,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "gh-pages": "^6.1.1",
     "tailwindcss": "^3.4.1",
     "vite": "^5.0.8"
   }
