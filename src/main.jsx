@@ -8,7 +8,7 @@ import { NotFound } from "./components/NotFound";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>
     <Routes>
-      <Route path="/reflection" element={<App />} />
+      <Route path="/" element={<App />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </Router>
